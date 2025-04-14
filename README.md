@@ -65,6 +65,17 @@ aceitar somente versões dependências específicas, sem o uso de maior que
 save-exact=true
 ```
 
+- **dotenv**: Responsável por carregar o arquivo `.env` e transformar isso em variáveis de ambiente
+dentro do Node.js
+```shell
+npm i dotenv
+```
+
+- **zod**
+```shell
+npm i zod
+```
+
 ### Extras
 
 - **Bot para automatizar teste de versão de dependência**: Esse bot fica tentando atualizar
