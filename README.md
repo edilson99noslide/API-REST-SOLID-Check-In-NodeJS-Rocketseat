@@ -58,3 +58,18 @@ npx tsc --init
 ```shell
 npm i fastify
 ```
+
+- **Configuração do npm**: Crie um arquivo na raíz com o nome `.npmrc`, configurei ele para
+aceitar somente versões dependências específicas, sem o uso de maior que
+```text
+save-exact=true
+```
+
+### Extras
+
+- **Bot para automatizar teste de versão de dependência**: Esse bot fica tentando atualizar
+todas as dependências do projeto e roda os testes automatizados para validar se a aplicação continua
+funcionando normalmente após alterar, caso passe nos testes ele cria um PR no repositório avisando que pode atualizar a dependência e se o teste
+falhar ele avisa para a gente exatamente onde falhou.
+
+Referência: [Repositório | renovate](https://github.com/renovatebot/renovate)
