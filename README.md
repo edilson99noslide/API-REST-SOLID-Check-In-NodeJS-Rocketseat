@@ -84,3 +84,13 @@ funcionando normalmente após alterar, caso passe nos testes ele cria um PR no r
 falhar ele avisa para a gente exatamente onde falhou.
 
 Referência: [Repositório | renovate](https://github.com/renovatebot/renovate)
+
+- **Criando aliases de importação**: `tsconfig.json`
+```json
+{
+  "baseUrl": "./",
+  "paths": {
+    "@/*": ["./src/*"]
+  }
+}
+```
