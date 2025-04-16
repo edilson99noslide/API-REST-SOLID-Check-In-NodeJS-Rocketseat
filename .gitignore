@@ -18,3 +18,6 @@ yarn-error.log*
 
 # Sistema
 .DS_Store
+
+# Prisma
+/generated/

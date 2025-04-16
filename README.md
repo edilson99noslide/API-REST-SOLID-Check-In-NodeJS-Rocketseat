@@ -76,6 +76,42 @@ npm i dotenv
 npm i zod
 ```
 
+## ORMs do Node.js
+
+### TypeORM
+
+Referência [ORM | TypeORM](https://typeorm.io/)
+
+### Sequelize
+
+Referência [ORM | Sequelize](https://sequelize.org/)
+
+### Prisma
+
+- **Instalação**
+```shell
+npm i prisma -D
+```
+
+- **Iniciando o prisma**
+```shell
+npx prisma init
+```
+
+- **Dependência de produção**: Responsável por poder trabalhar com as tipagens e "métodos" do primsa
+```shell
+npm i @prisma/client
+```
+
+- **Configurar import** `src/lib/prisma.ts`
+```ts
+export * from '../../generated/prisma';
+```
+
+- **Criar a tipagem do schema**: Cria de forma automatizada a tipagem do schema (integração com a tipagem do TypeScript)
+
+Referência [ORM | Prisma](https://www.prisma.io/)
+
 ### Extras
 
 - **Bot para automatizar teste de versão de dependência**: Esse bot fica tentando atualizar
