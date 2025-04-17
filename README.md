@@ -109,8 +109,63 @@ export * from '../../generated/prisma';
 ```
 
 - **Criar a tipagem do schema**: Cria de forma automatizada a tipagem do schema (integração com a tipagem do TypeScript)
+```shell
+npx prisma generat
+```
+
+- **Comandos**
+
+| Comando                  | O que faz                                    |
+|--------------------------|----------------------------------------------|
+| `npx prisma migrate dev` | `Cria uma migration`                         |
+| `npx prisma studio`      | `Cria uma interface do banco para navegador` |
+- **Rodando o PostgreSQL com Docker**
+```shell
+docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql:latest
+```
+
+1. Significa que deu certo: `LOG: database system is ready to accept connections`
+
+- **Variáveis ambiente**
+
+| Variáveis             | O que representa  |
+|-----------------------|-------------------|
+| `POSTGRESQL_USERNAME` | `Nome do usuário` |
+| `POSTGRESQL_PASSWORD` | `Senha do banco`  |
+| `POSTGRESQL_DATABASE` | `Nome do banco`   |
+
+- **Flags**
+
+| flags    | O que representa                                 |
+|----------|--------------------------------------------------|
+| `--name` | `nome`                                           |
+| `-e`     | `adiciona variável ambiente`                     |
+| `-p`     | `Porta (porta docker para porta host 5432:5432)` |
 
 Referência [ORM | Prisma](https://www.prisma.io/)
+
+- **Comandos úteis**
+
+| Comandos                        | O que representa                                                                       |
+|---------------------------------|----------------------------------------------------------------------------------------|
+| `docker ps`                     | `Lista todos os containers rodando`                                                    |
+| `docker ps -a`                  | `Lista todos os containers que já criei em algum momento ordenado por data de criação` |
+| `docker start nome-do-docker`   | `Inicia o docker`                                                                      |
+| `docker stop nome-do-docker`    | `Pausa o docker`                                                                       |
+| `docker rm nome-do-docker`      | `Excluir o docker`                                                                     |
+| `docker logs nome-do-docker`    | `Mostra os logs do docker`                                                             |
+| `docker logs -f nome-do-docker` | `Mantém os logs do docker no terminal`                                                 |
+
+- **Variável ambiente da conexão** `.env`
+```text
+DATABASE_URL="postgresql://nome:senha@localhost:5432/nomeDoBanco?schema=public"
+```
+
+### Docker
+
+## Imagem bitnami/postgresql
+
+Referencia[Imagem Docker | bitname/postgres](https://hub.docker.com/r/bitnami/postgresql)
 
 ### Extras
 
