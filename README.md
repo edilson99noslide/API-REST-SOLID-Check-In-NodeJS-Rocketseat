@@ -121,6 +121,24 @@ npx prisma generat
 | `npx prisma studio`      | `Cria uma interface do banco para navegador` |
 
 
+- **Diagrama de tabelas**
+```shell
+npm install -D prisma-dbml-generator
+```
+
+1. Adicionar no final do arquivo `prisma/schema.prisma`
+```text
+generator dbml {
+  provider = "prisma-dbml-generator"
+  output   = "./dbml"
+}
+```
+
+2. Comando
+```shell
+npx prisma generate
+```
+
 Referência [ORM | Prisma](https://www.prisma.io/)
 
 ## Docker
@@ -198,14 +216,15 @@ services:
 3. `-p 5432:5432` é a porta, fica logo abaixo de ports
 4. tudo o que vem após a flag `-e` são as variáveis de ambiente e ficam logo abaixo de environment
 
-Referencia[Imagem Docker | bitname/postgres](https://hub.docker.com/r/bitnami/postgresql)
+Referencia: [Imagem Docker | bitname/postgres](https://hub.docker.com/r/bitnami/postgresql)
 
-### Extras
+## Extras
 
-- **Bot para automatizar teste de versão de dependência**: Esse bot fica tentando atualizar
-todas as dependências do projeto e roda os testes automatizados para validar se a aplicação continua
-funcionando normalmente após alterar, caso passe nos testes ele cria um PR no repositório avisando que pode atualizar a dependência e se o teste
-falhar ele avisa para a gente exatamente onde falhou.
+### Bot para automatizar teste de versão de dependência
+
+- **O que ele faz**: Esse bot fica tentando atualizar todas as dependências do projeto e roda os testes automatizados 
+para validar se a aplicação continua funcionando normalmente após alterar, caso passe nos testes ele cria um PR no repositório
+avisando que pode atualizar a dependência e se o teste falhar ele avisa para a gente exatamente onde falhou.
 
 Referência: [Repositório | renovate](https://github.com/renovatebot/renovate)
 
