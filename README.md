@@ -115,10 +115,11 @@ npx prisma generat
 
 - **Comandos**
 
-| Comando                  | O que faz                                    |
-|--------------------------|----------------------------------------------|
-| `npx prisma migrate dev` | `Cria uma migration`                         |
-| `npx prisma studio`      | `Cria uma interface do banco para navegador` |
+| Comando                     | O que faz                                    |
+|-----------------------------|----------------------------------------------|
+| `npx prisma migrate dev`    | `Cria uma migration`                         |
+| `npx prisma studio`         | `Cria uma interface do banco para navegador` |
+| `npx prisma migrate deploy` | `Cria uma migration em produção`             |
 
 
 - **Diagrama de tabelas**
