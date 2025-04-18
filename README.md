@@ -229,7 +229,7 @@ avisando que pode atualizar a dependência e se o teste falhar ele avisa para a 
 
 Referência: [Repositório | renovate](https://github.com/renovatebot/renovate)
 
-- **Criando aliases de importação**: `tsconfig.json`
+### Criando aliases de importação `tsconfig.json`
 ```json
 {
   "baseUrl": "./",
@@ -238,3 +238,28 @@ Referência: [Repositório | renovate](https://github.com/renovatebot/renovate)
   }
 }
 ```
+
+### Hash de senha
+
+- **bcryptjs**
+
+1. Comando
+```shell
+npm i bcryptjs
+npm i -D @types/bcryptjs
+```
+
+2. Importação
+```ts
+import { hash } from 'bcryptjs';
+```
+
+3. Como usar: use o método importado hash(), o seu primeiro parâmetro espera
+o valor que será criptografado, no caso a `senha`, no segundo parâmetro espera o `round`
+que é a quantidade de vezes que a senha será criptografada. **Cuidado!**: A quantidade
+de rounds exige processamento, use moderadamente
+```ts
+const password_hash = await hash(password, 6);
+```
+
+Referência: [Hash de senha | bcryptjs](https://www.npmjs.com/package/bcryptjs)
