@@ -119,6 +119,14 @@ npx prisma generat
 |--------------------------|----------------------------------------------|
 | `npx prisma migrate dev` | `Cria uma migration`                         |
 | `npx prisma studio`      | `Cria uma interface do banco para navegador` |
+
+
+Referência [ORM | Prisma](https://www.prisma.io/)
+
+## Docker
+
+### Como usar o docker
+
 - **Rodando o PostgreSQL com Docker**
 ```shell
 docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql:latest
@@ -142,8 +150,6 @@ docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSW
 | `-e`     | `adiciona variável ambiente`                     |
 | `-p`     | `Porta (porta docker para porta host 5432:5432)` |
 
-Referência [ORM | Prisma](https://www.prisma.io/)
-
 - **Comandos úteis**
 
 | Comandos                        | O que representa                                                                       |
@@ -155,15 +161,42 @@ Referência [ORM | Prisma](https://www.prisma.io/)
 | `docker rm nome-do-docker`      | `Excluir o docker`                                                                     |
 | `docker logs nome-do-docker`    | `Mostra os logs do docker`                                                             |
 | `docker logs -f nome-do-docker` | `Mantém os logs do docker no terminal`                                                 |
+| `docker-compose up -d`          | `Rodando o docker pelo docker-compose.yml sem ficar exibindo os logs no terminal`      |
+| `docker-compose down`           | `Parar a execução do docker e deleta o container`                                      |
+| `docker-compose stop`           | `Parar a execução do docker`                                                           |
 
 - **Variável ambiente da conexão** `.env`
 ```text
 DATABASE_URL="postgresql://nome:senha@localhost:5432/nomeDoBanco?schema=public"
 ```
 
-### Docker
+### Traduzindo o comando para `docker-compose.yml`
 
-## Imagem bitnami/postgresql
+- **Comando do exemplo a cima**
+```shell
+docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql:latest
+```
+
+- **Arquivo** `docker-compose.yml`
+```yaml
+version: '3.8'
+
+services:
+  api-solid-pg:
+    image: bitnami/postgresql:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=apisolid
+```
+
+- **Tradução**
+1. `--name api-solid-pg` é o nome do serviço, loga abaixo de services
+2. `bitnami/postgresql:latest` é a imagem
+3. `-p 5432:5432` é a porta, fica logo abaixo de ports
+4. tudo o que vem após a flag `-e` são as variáveis de ambiente e ficam logo abaixo de environment
 
 Referencia[Imagem Docker | bitname/postgres](https://hub.docker.com/r/bitnami/postgresql)
 
