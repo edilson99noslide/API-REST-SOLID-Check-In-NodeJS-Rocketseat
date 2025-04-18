@@ -80,11 +80,11 @@ npm i zod
 
 ### TypeORM
 
-Referência [ORM | TypeORM](https://typeorm.io/)
+Referência: [ORM | TypeORM](https://typeorm.io/)
 
 ### Sequelize
 
-Referência [ORM | Sequelize](https://sequelize.org/)
+Referência: [ORM | Sequelize](https://sequelize.org/)
 
 ### Prisma
 
@@ -140,7 +140,7 @@ generator dbml {
 npx prisma generate
 ```
 
-Referência [ORM | Prisma](https://www.prisma.io/)
+Referência: [ORM | Prisma](https://www.prisma.io/)
 
 ## Docker
 
