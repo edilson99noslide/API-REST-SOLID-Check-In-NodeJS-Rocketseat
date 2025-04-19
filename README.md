@@ -219,6 +219,17 @@ services:
 
 Referencia: [Imagem Docker | bitname/postgres](https://hub.docker.com/r/bitnami/postgresql)
 
+## Princípios SOLID
+
+### D - Dependency Inversion Principle = Princípio da inversão de dependência
+
+- **Conceitos**
+
+1. Ela inverte a dependência, ao invés da classe instanciar as dependências que ela precisa
+ela vai receber no parâmetro do construtor.
+
+2. Todo service terá somente um método `handle` ou `execute` e um construtor
+
 ## Design Patterns
 
 ### Repository Pattern
