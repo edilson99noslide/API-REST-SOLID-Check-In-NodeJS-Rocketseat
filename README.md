@@ -219,6 +219,18 @@ services:
 
 Referencia: [Imagem Docker | bitname/postgres](https://hub.docker.com/r/bitnami/postgresql)
 
+## Design Patterns
+
+### Repository Pattern
+
+- **Estrutura de arquivos** `src/repositories/prisma-model-repository.ts`
+
+- **Benefício**: Manter os arquivos relacionados às comunicações com o banco de dados
+oferece muitas vantagens
+
+1. Exemplo 1: Se por exemplo eu queira alterar o ORM, de `prisma` para o `typeorm` o procedimento
+seria mais fácil, pois todos os arquivos relacionados ao banco estariam separados
+
 ## Extras
 
 ### Bot para automatizar teste de versão de dependência
