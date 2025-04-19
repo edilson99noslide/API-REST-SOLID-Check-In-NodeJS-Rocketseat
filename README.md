@@ -29,7 +29,7 @@
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página
 - [ ] O usuário deve ser identificado por um JWT (JSON Web Token)
 
-## Estrutura do projeto
+## Start do projeto
 
 ### Instalações
 
@@ -241,6 +241,34 @@ oferece muitas vantagens
 
 1. Exemplo 1: Se por exemplo eu queira alterar o ORM, de `prisma` para o `typeorm` o procedimento
 seria mais fácil, pois todos os arquivos relacionados ao banco estariam separados
+
+## Estrutura do projeto
+
+### Arquivos de erro
+
+1. Path: `src/use-cases/errors/user-already-exists-error.ts`
+
+2. Código
+```ts
+export class UserAlreadyExistsError extends Error { // estende do erro nativo do JavaScript
+  constructor() {
+    super('Já existe um usuário com esse e-mail cadastrado!');
+  }
+}
+```
+
+3. Como usar
+```ts
+import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
+
+// Exception
+if(userExists) throw new UserAlreadyExistsError();
+
+// Identificando erros específicos para disparar HTTP Status Code correto
+if(error instanceof UserAlreadyExistsError) {
+  return reply.status(409).send({ success : false, message: error.message });
+}
+```
 
 ## Extras
 
