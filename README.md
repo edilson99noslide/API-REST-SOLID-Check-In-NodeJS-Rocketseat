@@ -301,6 +301,47 @@ app.setErrorHandler((error, _request, reply) => {
 });
 ```
 
+## Testes automatizados
+
+### Vitest
+
+- **Instalação**
+```shell
+npm i vitest vite-tsconfig-paths -D
+```
+
+- **Arquivo de configuração** `vite.config.ts`
+```ts
+import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+
+export default defineConfig({
+  plugins: [tsconfigPaths()],
+});
+```
+
+- **Aliases para script de teste**
+```json
+{
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  }
+}
+```
+
+- **Arquivos de teste** `src/use-cases/register.spec.ts`
+```ts
+import { expect, test } from 'vitest';
+
+test('Testando se a configuração do vitest funcionou', () => {
+  expect(2 + 2).toBe(4);
+});
+```
+
+Referência: [Ferramenta de teste | vitest](https://vitest.dev/)
+
 ## Extras
 
 ### Bot para automatizar teste de versão de dependência
