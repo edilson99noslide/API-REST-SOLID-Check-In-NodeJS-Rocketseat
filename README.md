@@ -240,7 +240,46 @@ ela vai receber no parâmetro do construtor.
 oferece muitas vantagens
 
 1. Exemplo 1: Se por exemplo eu queira alterar o ORM, de `prisma` para o `typeorm` o procedimento
-seria mais fácil, pois todos os arquivos relacionados ao banco estariam separados
+seria mais fácil, isso torna os nossos testes mais fáceis de serem executados e focamos em somente nas funcionalidades do caso de uso
+
+### In Memory Database
+
+- **Estrutura de arquivos** `src/repositories/in-memory/in-memory-users-repository.ts`
+```ts
+import { UsersRepositoryInterface } from '@/repositories/users-repository';
+import { User, Prisma } from 'generated/prisma';
+
+export class InMemoryUsersRepository implements UsersRepositoryInterface {
+  public items: User[] = [];
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = this.items.find(item => item.email === email);
+
+    if(!user) return null;
+
+    return user;
+  }
+
+  async create(data: Prisma.UserCreateInput): Promise<User> {
+    const user = {
+      name: data.name,
+      id: 'user-1',
+      email: data.email,
+      password_hash: data.password_hash,
+      created_at: new Date(),
+    }
+
+    this.items.push(user);
+
+    return user;
+  }
+}
+```
+
+- **Benefícios**: Quando precisamos executar um teste da aplicação, podemos utilizar
+a representação do banco de dados salvo em memória, isso irá simplificar e 
+
+Referência: [In Memory Database | Informação](https://martinfowler.com/bliki/InMemoryTestDatabase.html)
 
 ## Estrutura do projeto
 

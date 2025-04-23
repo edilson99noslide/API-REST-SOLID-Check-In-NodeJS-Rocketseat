@@ -1,24 +1,26 @@
 import { expect, describe, test } from 'vitest';
 import { RegisterUseCase } from '@/use-cases/register';
 import { compare } from 'bcryptjs';
+import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
+import {UserAlreadyExistsError} from "@/use-cases/errors/user-already-exists-error";
 
 describe('register tests', () => {
-  test('A senha do usuário deve estar criptografada assim que ele ser criado', async () => {
-    const registerUseCase = new RegisterUseCase({
-      async findByEmail(email) {
-        return null;
-      },
+  test('Não deve ser possível cadastrar um usuário', async () => {
+    const UsersRepository = new InMemoryUsersRepository();
+    const registerUseCase = new RegisterUseCase(UsersRepository);
 
-      async create(data) {
-        return {
-          name: data.name,
-          id: 'user-1',
-          email: data.email,
-          password_hash: data.password_hash,
-          created_at: new Date(),
-        }
-      },
+    const { user } = await registerUseCase.handle({
+      name: 'Usuário de teste',
+      email: 'usuario-de-exemplo@gmail.com',
+      password: '123456',
     });
+
+    expect(user.id).toEqual(expect.any(String));
+  });
+
+  test('A senha do usuário deve estar criptografada assim que ele ser criado', async () => {
+    const UsersRepository = new InMemoryUsersRepository();
+    const registerUseCase = new RegisterUseCase(UsersRepository);
 
     const { user } = await registerUseCase.handle({
       name: 'Usuário de teste',
@@ -32,5 +34,26 @@ describe('register tests', () => {
     );
 
     expect(isPasswordCorrectlyHashed).toBe(true);
+  });
+
+  test('Não deve ser possível cadastrar um usuário com um e-mail existente', async () => {
+    const UsersRepository = new InMemoryUsersRepository();
+    const registerUseCase = new RegisterUseCase(UsersRepository);
+
+    const email = 'usuario-de-exemplo@gmail.com';
+
+    await registerUseCase.handle({
+      name: 'Usuário de teste',
+      email,
+      password: '123456',
+    });
+
+    await expect(() =>
+      registerUseCase.handle({
+        name: 'Usuário de teste',
+        email,
+        password: '123456',
+      })
+    ).rejects.toBeInstanceOf(UserAlreadyExistsError);
   });
 });
