@@ -379,6 +379,30 @@ test('Testando se a configuração do vitest funcionou', () => {
 });
 ```
 
+- **Gerar coverage de teste**: Coverage é uma representação visual dos testes, indicando
+quantas vezes um teste passou por uma determinada linha do arquivo.
+
+1. Crie o script em `package.json`
+```json
+{
+  "scripts": {
+    "test:coverage": "vitest run --coverage"
+  }
+}
+```
+
+2. Executando o teste com coverage
+```shell
+npm run teste:coverage
+```
+
+3. Solicitação da dependência, digite "y"
+```text
+MISSING DEPENDENCY  Cannot find dependency '@vitest/coverage-v8'
+```
+
+4. Local do arquivo gerado `coverage/index.html`
+
 Referência: [Ferramenta de teste | vitest](https://vitest.dev/)
 
 ## Extras
