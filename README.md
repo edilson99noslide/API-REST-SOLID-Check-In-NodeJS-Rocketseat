@@ -403,6 +403,27 @@ MISSING DEPENDENCY  Cannot find dependency '@vitest/coverage-v8'
 
 4. Local do arquivo gerado `coverage/index.html`
 
+- **Usando o Vitest UI**
+
+1. Comando
+```shell
+npm i -D @vitest/ui
+```
+
+2. Arquivo `package.json`
+```json
+{
+  "scripts": {
+    "test:ui": "vitest --ui"
+  }
+}
+```
+
+3. Comando
+```shell
+npm run test:ui
+```
+
 Referência: [Ferramenta de teste | vitest](https://vitest.dev/)
 
 ## Extras
