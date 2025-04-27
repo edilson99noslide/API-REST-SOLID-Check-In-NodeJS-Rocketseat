@@ -281,6 +281,36 @@ a representação do banco de dados salvo em memória, isso irá simplificar e
 
 Referência: [In Memory Database | Informação](https://martinfowler.com/bliki/InMemoryTestDatabase.html)
 
+### System Under Test - SUT
+
+- **Qual a finalidade**: A função do SUT é garantir o foco no pedaço do código que você quer garantir
+que está funcionando corretamente
+
+- **Modo de uso**: Nos testes unitários ou de integração a variável com o nome de sut é a que você precisa
+realmente validar `src/use-cases/authenticate.spec.ts`
+```ts
+import { expect, describe, test } from 'vitest';
+import { compare } from 'bcryptjs';
+import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
+import {AuthenticateUseCase} from "@/use-cases/authenticate";
+
+describe('Authenticate tests', () => {
+  test('Deve ser possível autenticar na aplicação', async () => {
+    const UsersRepository = new InMemoryUsersRepository();
+    const sut = new AuthenticateUseCase(UsersRepository); // uso do SUT
+
+    const { user } = await sut.handle({
+      name: 'Usuário de teste',
+      email: 'usuario-de-exemplo@gmail.com',
+      password: '123456',
+    });
+
+    expect(user.id).toEqual(expect.any(String));
+  });
+});
+
+```
+
 ## Estrutura do projeto
 
 ### Arquivos de erro
