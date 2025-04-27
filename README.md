@@ -292,23 +292,43 @@ realmente validar `src/use-cases/authenticate.spec.ts`
 import { expect, describe, test } from 'vitest';
 import { compare } from 'bcryptjs';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
-import {AuthenticateUseCase} from "@/use-cases/authenticate";
+import { AuthenticateUseCase } from '@/use-cases/authenticate';
 
 describe('Authenticate tests', () => {
-  test('Deve ser possível autenticar na aplicação', async () => {
-    const UsersRepository = new InMemoryUsersRepository();
-    const sut = new AuthenticateUseCase(UsersRepository); // uso do SUT
-
-    const { user } = await sut.handle({
-      name: 'Usuário de teste',
-      email: 'usuario-de-exemplo@gmail.com',
-      password: '123456',
-    });
-
-    expect(user.id).toEqual(expect.any(String));
+  test('Não deve ser possível autenticar na aplicação caso não exista o usuário cadastrado', async () => {
+    await expect(
+      () =>
+        sut.handle({
+          email: 'usuario-de-exemplo@gmail.com',
+          password: '1234567',
+        })
+    ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
 });
 
+```
+
+### Factory
+
+- **Benefícios**: Como o nome já diz, ela assemelha a ideia de uma fábrica, ou seja, ela vai fabricar
+o que precisa no contexto atual, fabricar várias dependências de repositórios é sua principal função
+e é importante que ela não tenha nenhuma regra de negócio, somente as dependências.
+
+- **Um exemplo**: Caso precise instanciar dependências de um register, ao invés de necessitar instanciar eles nos arquivos
+basta chamar a função do factory que será responsável por instanciar as dependências.
+
+- **Estrutura de arquivos** É opcional, mas seria legal utilizar no início do nome dos arquivos a palavra make 
+`src/use-cases/factories/make-register-use-case.ts`
+```ts
+import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
+import { RegisterUseCase } from "@/use-cases/register";
+
+export function makeRegisterUseCase() {
+  const usersRepository = new PrismaUsersRepository();
+  const registerUseCase = new RegisterUseCase(usersRepository);
+
+  return registerUseCase;
+}
 ```
 
 ## Estrutura do projeto
