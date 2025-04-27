@@ -1,15 +1,20 @@
-import { expect, describe, test } from 'vitest';
+import {expect, describe, test, beforeEach} from 'vitest';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
 import { AuthenticateUseCase } from '@/use-cases/authenticate';
 import { hash } from 'bcryptjs';
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error';
 
-describe('Authenticate tests', () => {
-  test('Deve ser possível autenticar na aplicação', async () => {
-    const UsersRepository = new InMemoryUsersRepository();
-    const sut = new AuthenticateUseCase(UsersRepository);
+let usersRepository: InMemoryUsersRepository;
+let sut: AuthenticateUseCase;
 
-    UsersRepository.create({
+describe('Authenticate tests', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository();
+    sut = new AuthenticateUseCase(usersRepository);
+  });
+
+  test('Deve ser possível autenticar na aplicação', async () => {
+    usersRepository.create({
       name: 'usuario de exemplo',
       email: 'usuario-de-exemplo@gmail.com',
       password_hash: await hash('123456', 6),
@@ -24,10 +29,7 @@ describe('Authenticate tests', () => {
   });
 
   test('Não deve ser possível autenticar na aplicação caso não exista o usuário cadastrado', async () => {
-    const UsersRepository = new InMemoryUsersRepository();
-    const sut = new AuthenticateUseCase(UsersRepository);
-
-    await expect(
+   await expect(
       () =>
         sut.handle({
           email: 'usuario-de-exemplo@gmail.com',
@@ -37,10 +39,7 @@ describe('Authenticate tests', () => {
   });
 
   test('Não deve ser possível autenticar na aplicação caso as credenciais sejam inválidas', async () => {
-    const UsersRepository = new InMemoryUsersRepository();
-    const sut = new AuthenticateUseCase(UsersRepository);
-
-    await UsersRepository.create({
+    await usersRepository.create({
       name: 'usuario de exemplo',
       email: 'usuario-de-exemplo@gmail.com',
       password_hash: await hash('123456', 6),
