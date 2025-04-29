@@ -1,6 +1,7 @@
 {
   "name": "03-api-solid-nodejs",
   "version": "1.0.0",
+  "type": "module",
   "description": "- [ ] Deve ser possível se cadastrar\r - [ ] Deve ser possível se autenticar\r - [ ] Deve ser possível obter o perfil de um usuário logado\r - [ ] Deve ser possível obter o número de check-ins realizados pelo usuário logado\r - [ ] Deve ser possível o usuário obter seu histórico de check-ins\r - [ ] Deve ser possível o usuário buscar academias próximas\r - [ ] Deve ser possível o usuário buscar academias pelo nome\r - [ ] Deve ser possível o usuário realizar check-in em uma academia\r - [ ] Deve ser possível validar um check-in de um usuário\r - [ ] Deve ser possível cadastrar uma academia",
   "main": "index.js",
   "scripts": {
@@ -34,6 +35,7 @@
     "bcryptjs": "3.0.2",
     "dotenv": "16.5.0",
     "fastify": "^5.3.0",
+    "vite": "6.3.3",
     "zod": "3.24.2"
   }
 }
