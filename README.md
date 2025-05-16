@@ -4,7 +4,7 @@
 
 - [x] Deve ser possível se cadastrar
 - [x] Deve ser possível se autenticar
-- [ ] Deve ser possível obter o perfil de um usuário logado
+- [x] Deve ser possível obter o perfil de um usuário logado
 - [ ] Deve ser possível obter o número de check-ins realizados pelo usuário logado
 - [ ] Deve ser possível o usuário obter seu histórico de check-ins
 - [ ] Deve ser possível o usuário buscar academias próximas
@@ -16,7 +16,7 @@
 ### RNs - Regras de negócio
 
 - [x] O usuário não deve poder se cadastrar com um e-mail que já existe
-- [ ] O usuário não pode fazer 2 check-ins no mesmo dia
+- [x] O usuário não pode fazer 2 check-ins no mesmo dia
 - [ ] O usuário não pode fazer check-in se não estiver perto (100m) da academia
 - [ ] O check-in só pode ser validade até 20 minutos após criado
 - [ ] O check-in só pode ser validado por administradores
@@ -548,3 +548,26 @@ const password_hash = await hash(password, 6);
 ```
 
 Referência: [Hash de senha | bcryptjs](https://www.npmjs.com/package/bcryptjs)
+
+### Dayjs - Trabalhando com datas de forma mais simples
+
+1. Comando
+```shell
+npm i dayjs
+```
+
+2. Importação
+```ts
+import dayjs from "dayjs";
+```
+
+3. Como usar:
+```ts
+// Retorna 2025-05-15T00:00:00
+const startOfTheDay = dayjs(date).startOf('date');
+
+// Retorna 2025-05-15T23:59:59
+const endOfTheDay = dayjs(date).endOf('date');
+```
+
+Referência: [Dayjs | doc npm](https://day.js.org/docs/en/installation/node-js)
