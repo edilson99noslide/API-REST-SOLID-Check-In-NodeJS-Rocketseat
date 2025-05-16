@@ -9,7 +9,7 @@
 - [ ] Deve ser possível o usuário obter seu histórico de check-ins
 - [ ] Deve ser possível o usuário buscar academias próximas
 - [ ] Deve ser possível o usuário buscar academias pelo nome
-- [ ] Deve ser possível o usuário realizar check-in em uma academia
+- [x] Deve ser possível o usuário realizar check-in em uma academia
 - [ ] Deve ser possível validar um check-in de um usuário
 - [ ] Deve ser possível cadastrar uma academia
 
@@ -389,6 +389,34 @@ app.setErrorHandler((error, _request, reply) => {
   });
 });
 ```
+
+### TDD - Test-Driven Development - metodologia de desenvolvimento
+
+- **Red**: É o estado inicial do TDD, Red é o estado em que criaremos um teste
+antes do caso de uso e esse teste deve falhar, dar erro
+
+- **Green**: É o estado em que criamos a validação que faça o teste passar, mas o código não precisa
+ser muito bom, pode ser até duvidoso, o objetivo é fazer o teste dar sucesso
+
+- **Mocking para Date**
+```ts
+import { describe, beforeEach, afterEach, vi } from 'vitest';
+
+describe('Teste', () => {
+    beforeEach(() => {
+      // Antes de cada teste crie o mock
+      vi.useFakeTimers()
+    });
+    
+    afterEach(() => {
+      // Reseta o mock fake demais de cada teste
+      vi.useRealTimers()
+    });
+  }
+);
+```
+
+Referência: [Mocking para Date igual](https://vitest.dev/guide/mocking)
 
 ## Testes automatizados
 
